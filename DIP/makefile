@@ -4,7 +4,7 @@ LIB=
 
 CC=g++ -g
 CFLAGS=-Wall
-EXE=LSPDemo
+EXE=DIP
 
 all:
 	$(CC) $(CFLAGS) $(EXE).cpp -o $(EXE) $(INC_DIR) $(LIB_DIR) $(LIB)
