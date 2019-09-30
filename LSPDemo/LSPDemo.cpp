@@ -5,7 +5,28 @@
 
 using namespace std;
 
-class Bird
+class Animal
+{
+public:
+    virtual void setRunSpeed(double speed)
+    {
+        runSpeed = speed;
+    }
+
+    virtual double getRunSpeed(double distance)
+    {
+        if(runSpeed == 0)
+        {
+            throw "Division by zero condition.";
+        }
+        return (distance/runSpeed);
+    }
+
+    double runSpeed;
+
+};
+
+class Bird : public Animal
 {
 public:
     virtual void setSpeed(double speed)
@@ -13,9 +34,9 @@ public:
         flySpeed = speed;
     }
 
-    double getFlyTime(double distance)
+    virtual double getFlyTime(double distance)
     {
-        if(flySpeed==0)
+        if (flySpeed == 0)
         {
             throw "Division by zero condition.";
         }
@@ -29,30 +50,30 @@ class Swallow : public Bird
 {
 };
 
-class BrownKiwi : public Bird
+class BrownKiwi : public Animal
 {
 public:
-    void setSpeed(double speed)
+    void setRunSpeed(double speed)
     {
-        flySpeed = 0;
+        runSpeed = speed;
     }
 };
 
 int main()
 {
     Bird *bird1 = new Swallow();
-    Bird *bird2 = new BrownKiwi();
+    Animal *bird2 = new BrownKiwi();
     bird1->setSpeed(120);
-    bird2->setSpeed(120);
+    bird2->setRunSpeed(120);
 
     std::cout << "如果飞行300km:" << std::endl;
 
     try
     {
         std::cout << "燕子将飞行: " << bird1->getFlyTime(300) << "h" << std::endl;
-        std::cout << "几维鸟将飞行: " << bird2->getFlyTime(300) << "h" << std::endl;
+        std::cout << "几维鸟将飞行: " << bird2->getRunSpeed(300) << "h" << std::endl;
     }
-    catch(char const *str)
+    catch (char const *str)
     {
         std::cout << str << std::endl;
     }
